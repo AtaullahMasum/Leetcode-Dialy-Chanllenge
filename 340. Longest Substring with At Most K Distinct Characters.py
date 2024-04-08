@@ -1,3 +1,5 @@
+# When say at most k character hashmap length less or equal to k len(hashMap) <= k
+# When say k unique character than hashmap length equal to k  len(hashMap) == k
 # Brute Force Approch
 # Time Complexity is O(n^2)
 # Space Complexity is O(256)
@@ -31,7 +33,7 @@ class Solution:
                     if hashMap[s[left]] == 0:
                         hashMap.pop(s[left])
                     left += 1
-            if len(hashMap) == k:
+            if len(hashMap) <= k:
                 maxlen = max(maxlen, right - left + 1)
             right += 1    
         return maxlen
@@ -51,7 +53,7 @@ class Solution:
                 if hashMap[s[left]] == 0:
                     hashMap.pop(s[left])
                 left += 1
-            if len(hashMap) == k:
+            if len(hashMap) <= k:
                 maxlen = max(maxlen, right - left + 1)
             right += 1
         return maxlen
