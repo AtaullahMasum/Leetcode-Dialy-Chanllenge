@@ -1,3 +1,46 @@
+# Brute Force Solution using recursively
+# Time Complexity is O(n^n)
+# Space Complexity is O(n)
+class Solution:
+    def minFallingPathSum(self, arr: List[List[int]]) -> int:
+        n = len(arr)
+        def helper(r, c):
+            if r == n-1:
+                return arr[r][c]
+
+            res = float('inf')
+            for col in range(n):
+                if c != col:
+                    res = min(res, arr[r][c]+helper(r+1, col))
+            return res
+        res = float('inf')
+        for c in range(n):
+            res  = min(res, helper(0, c))
+        return res
+# Better Solution using caching
+# Time Complexity is O(n^3)
+# Space Complexity is O(n)
+class Solution:
+    def minFallingPathSum(self, arr: List[List[int]]) -> int:
+        cache = {}
+        n = len(arr)
+        def helper(r, c):
+            if r == n-1:
+                return arr[r][c]
+            if (r, c) in cache:
+                return cache[(r, c)]
+
+            res = float('inf')
+            for col in range(n):
+                if c != col:
+                    res = min(res, arr[r][c]+helper(r+1, col))
+            cache[(r, c)] = res
+            return res
+        res = float('inf')
+        for c in range(n):
+            res  = min(res, helper(0, c))
+        return res
+
 # Optimal Solution Using Dynamic Programming
 # Time Complexity is O(n^2)
 # Space Complexity is O(n^2)
